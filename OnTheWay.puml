@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+    - id : int
+    - fullNavn: String
+    - tlfNummer: int
+    - birthDate: LocalDate
+    - favoraitStation: List<Station>
+    - tickets : List<Ticket>
+}
+
+
+class Train{
+    - id: int
+    - name: String
+
+}
+class Station{
+    - id : int
+    - navn : String
+    - latitude : double
+    - longitude : double
+    - trainFromStation: List<Train>
+}
+class Trip {
+    - id : int
+    - departureTime : DateTime
+    - arrivalTime : DateTime
+    - fromStation : Station
+    - toStation : Station
+}
+
+
+
+abstract class Ticket {
+    - id : int
+    - basePrice : double
+    - purchaseDate : DateTime
+    - validUntil : DateTime
+}
+
+class StudentTicket extends Ticket
+class ChildTicket extends Ticket
+class SeniorTicket extends Ticket
+
+User o-- Ticket
+Trip o-- Train
+Station o-- Train
+User o-- Station
+
+@enduml
