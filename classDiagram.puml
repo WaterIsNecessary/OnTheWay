@@ -90,6 +90,34 @@ class Journey {
     + getJourneyInfo() : String
 }
 
+class TicketController {
+    -api class
+}
+
+class NotificationController {
+    -api class
+}
+
+class JourneyController {
+    -api class
+}
+
+class StationController {
+    -api class
+}
+
+class GPSController {
+    -api class
+}
+
+class AuthenticationController {
+    -api class
+}
+
+class AnalyticsController {
+    -api class
+}
+
 User <..> NotificationManager
 User <..> PurchaseManager
 User <..> JourneyAnalyzer
