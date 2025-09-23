@@ -5,9 +5,9 @@ abstract class Ticket {
     - basePrice : double
     - purchaseDate : DateTime
     - validUntil : DateTime
-    + validatePayment() : boolean
-    + generateReceipt() : String
+
     + displayAsQRCode() : Image
+
 }
 
 class StudentTicket
@@ -25,10 +25,11 @@ class User {
     - birthDate : LocalDate
     - tickets : List<Ticket>
     - favorites : List<Station>
-    - savedDestinations : List<Journey>
+    - savedJourneys : List<Journey>
     + login(email: String, password: String) : boolean
     + register(email: String, password: String) : boolean
     + continueAsGuest() : void
+    + addToExpiredTickets(Ticket): List <Ticket>
 }
 
 class NotificationManager {
@@ -41,6 +42,8 @@ class NotificationManager {
 class PurchaseManager {
     + purchaseTicket(userId: int, ticketType: String) : Ticket
     + getPurchaseHistory(userId: int) : List<Ticket>
+    + validatePayment() : boolean
+    + generateReceipt() : String
 }
 
 class JourneyAnalyzer {
@@ -81,6 +84,7 @@ class Journey {
     - fromStation : Station
     - toStation : Station
     - train : Train
+    - notifications : boolean
     + checkForDelays() : boolean
     + getPlatformChanges() : String
     + getJourneyInfo() : String
