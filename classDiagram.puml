@@ -75,6 +75,9 @@ class Station {
     - latitude : double
     - longitude : double
     - trainFromStation : List<Train>
+    - numberOfPlatforms: int
+    - listOfPlatforms: list<boolean>
+    + countPlatforms(list<boolean>): int
 }
 
 class Journey {
