@@ -1,0 +1,140 @@
+@startuml
+
+abstract class Ticket {
+    - id : int
+    - basePrice : double
+    - purchaseDate : DateTime
+    - validUntil : DateTime
+
+    + displayAsQRCode() : Image
+
+}
+
+class StudentTicket
+class ChildTicket
+class SeniorTicket
+
+Ticket <|-- StudentTicket
+Ticket <|-- ChildTicket
+Ticket <|-- SeniorTicket
+
+class User {
+    - id : int
+    - fullNavn : String
+    - tlfNummer : int
+    - birthDate : LocalDate
+    - tickets : List<Ticket>
+    - favorites : List<Station>
+    - savedJourneys : List<Journey>
+    + login(email: String, password: String) : boolean
+    + register(email: String, password: String) : boolean
+    + continueAsGuest() : void
+    + addToExpiredTickets(Ticket): List <Ticket>
+}
+
+class NotificationManager {
+    + enableJourneyAlerts(journeyId: int) : void
+    + disableJourneyAlerts(journeyId: int) : void
+    + scheduleJourneyReminders(journeyId: int) : void
+    + sendPushNotification(message: String) : void
+}
+
+class PurchaseManager {
+    + purchaseTicket(userId: int, ticketType: String) : Ticket
+    + getPurchaseHistory(userId: int) : List<Ticket>
+    + validatePayment() : boolean
+    + generateReceipt() : String
+}
+
+class JourneyAnalyzer {
+    + getMostUsedJourneys(userId: int) : List<Journey>
+}
+
+class GPSService {
+    + requestPermission() : boolean
+    + getCurrentLocation() : Location
+    + getNearestStation(location: Location) : Station
+}
+
+class Location {
+    - latitude : double
+    - longitude : double
+    + getLatitude() : double
+    + getLongitude() : double
+}
+
+class Train {
+    - id : int
+    - name : String
+    + getOccupancyStatus() : String
+}
+
+class Station {
+    - id : int
+    - navn : String
+    - latitude : double
+    - longitude : double
+    - trainFromStation : List<Train>
+}
+
+class Journey {
+    - id : int
+    - departureTime : DateTime
+    - arrivalTime : DateTime
+    - fromStation : Station
+    - toStation : Station
+    - train : Train
+    - notifications : boolean
+    + checkForDelays() : boolean
+    + getPlatformChanges() : String
+    + getJourneyInfo() : String
+}
+
+class TicketController {
+    -api class
+}
+
+class NotificationController {
+    -api class
+}
+
+class JourneyController {
+    -api class
+}
+
+class StationController {
+    -api class
+}
+
+class GPSController {
+    -api class
+}
+
+class AuthenticationController {
+    -api class
+}
+
+class AnalyticsController {
+    -api class
+}
+
+User <..> NotificationManager
+User <..> PurchaseManager
+User <..> JourneyAnalyzer
+User <..> GPSService
+
+PurchaseManager <..> Ticket
+NotificationManager <..> Journey
+JourneyAnalyzer <..> Journey
+GPSService --> Station
+GPSService --> Location
+
+User o-- Ticket
+Station o-- Train
+User o-- Station
+Station <-- Journey
+Journey --> Train
+Journey --o User
+
+
+@enduml
