@@ -121,6 +121,7 @@ class AnalyticsController {
     -api class
 }
 
+
 User <..> NotificationManager
 User <..> PurchaseManager
 User <..> JourneyAnalyzer

@@ -117,7 +117,21 @@ class AuthenticationController {
 class AnalyticsController {
     -api class
 }
+interface TicketRepository {
+    + save(ticket : Ticket) : void
+    + findById(id : int) : Ticket
+}
 
+class TicketRepositoryDatabase {
+    + save(ticket : Ticket) : void
+    + findById(id : int) : Ticket
+}
+
+class TicketRepositoryHardCoding{
+
+}
+
+TicketRepository <|.. TicketRepositoryDatabase
 User <..> NotificationManager
 User <..> PurchaseManager
 User <..> JourneyAnalyzer

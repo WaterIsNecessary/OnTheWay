@@ -1,0 +1,44 @@
+@startuml
+package "Backend" {
+    database SQLDatabase
+
+    package "ServerLogic" {
+        component TicketService
+        component PurchaseService
+        component NotificationService
+        component JourneyService
+        component GPSService
+        component AnalyticsService
+        component AuthenticationService
+    }
+
+    component iNTERNAPI
+}
+
+package "Frontend" {
+    component WebApplication
+}
+
+
+WebApplication --> iNTERNAPI
+
+
+
+iNTERNAPI --> TicketService
+iNTERNAPI --> PurchaseService
+iNTERNAPI --> NotificationService
+iNTERNAPI --> JourneyService
+iNTERNAPI --> GPSService
+iNTERNAPI --> AnalyticsService
+iNTERNAPI --> AuthenticationService
+
+
+TicketService --> SQLDatabase
+PurchaseService --> SQLDatabase
+NotificationService --> SQLDatabase
+JourneyService --> SQLDatabase
+GPSService --> SQLDatabase
+AnalyticsService --> SQLDatabase
+AuthenticationService --> SQLDatabase
+
+@enduml
